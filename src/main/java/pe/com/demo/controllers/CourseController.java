@@ -4,13 +4,12 @@ package pe.com.demo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pe.com.demo.dtos.DTOCourse;
 import pe.com.demo.entities.Course;
 import pe.com.demo.services.CourseService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/vidal")
@@ -25,5 +24,11 @@ public class CourseController {
                 newCourse.getVfStartDate(), newCourse.getVfDescription(),
                 newCourse.getVfType());
         return new ResponseEntity<DTOCourse>(dtoCourse, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/courses")
+    public ResponseEntity<List<DTOCourse>> getAllCourses() {
+        List<DTOCourse> courses = courseService.getAllCourses();
+        return new ResponseEntity<List<DTOCourse>>(courses, HttpStatus.OK);
     }
 }
