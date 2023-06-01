@@ -22,7 +22,7 @@ public class CourseServiceImpl implements CourseService {
         return courseRepository.save(newCourse);
     }
 
-    @Override
+    @Autowired
     public List<DTOCourse> getAllCourses() {
         List<Course> courses = courseRepository.findAll();
         List<DTOCourse> dtoCourses = new ArrayList<>();
@@ -35,5 +35,29 @@ public class CourseServiceImpl implements CourseService {
             dtoCourses.add(dtoCourse);
         }
         return dtoCourses;
+    }
+
+    @Autowired
+    public List<DTOCourse> getCoursesByDate() {
+        List<Course> courses = courseRepository.findCourseByDate();
+        List<DTOCourse> dtoCourses = new ArrayList<>();
+
+        for (Course course : courses) {
+            DTOCourse dtoCourse = new DTOCourse(course.getVfId(),
+                    course.getVfName(), course.getVfCode(),
+                    course.getVfStartDate(), course.getVfDescription(),
+                    course.getVfType());
+            dtoCourses.add(dtoCourse);
+        }
+        return dtoCourses;
+    }
+
+    public DTOCourse getCourseById(Long id) {
+        Course course = courseRepository.findById(id).orElse(null);
+        DTOCourse dtoCourse = new DTOCourse(id,
+                course.getVfName(), course.getVfCode(),
+                course.getVfStartDate(), course.getVfDescription(),
+                course.getVfType());
+        return dtoCourse;
     }
 }

@@ -8,4 +8,6 @@ import java.util.List;
 public interface CourseService {
     public Course createCourse(Course course);
     public List<DTOCourse> getAllCourses();
+    public List<DTOCourse> getCoursesByDate();
+    public DTOCourse getCourseById(Long id);
 }

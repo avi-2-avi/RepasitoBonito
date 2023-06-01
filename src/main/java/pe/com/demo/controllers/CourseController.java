@@ -31,4 +31,16 @@ public class CourseController {
         List<DTOCourse> courses = courseService.getAllCourses();
         return new ResponseEntity<List<DTOCourse>>(courses, HttpStatus.OK);
     }
+
+    @GetMapping("/courses/date")
+    public ResponseEntity<List<DTOCourse>> getCoursesByDate() {
+        List<DTOCourse> courses = courseService.getCoursesByDate();
+        return new ResponseEntity<List<DTOCourse>>(courses, HttpStatus.OK);
+    }
+
+    @GetMapping("/courses/{id}")
+    public ResponseEntity<DTOCourse> getCourseById(@PathVariable("id") Long id) {
+        DTOCourse dtoCourse = courseService.getCourseById(id);
+        return new ResponseEntity<DTOCourse>(dtoCourse, HttpStatus.OK);
+    }
 }
